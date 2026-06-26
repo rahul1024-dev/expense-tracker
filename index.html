@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+  </head>
+  
+  <body>
+
+    <!-- ── App Shell ──────────────────────────────────────────── -->
+    <div class="app">
+
+      <!-- Site Header -->
+      <header class="site-header">
+        <h1 class="site-header__title">Expense Tracker</h1>
+        <p class="site-header__subtitle">Know where every rupee goes</p>
+        <button id="theme-toggle" class="theme-toggle">
+          🌙 Dark Mode
+        </button>
+      </header>
+
+      <main class="app__main">
+
+        <!-- ── Balance Section ──────────────────────────────── -->
+        <section class="balance-section" aria-labelledby="balance-heading">
+          <h2 class="balance-section__label" id="balance-heading">Total Balance</h2>
+          <p class="balance-section__amount" id="balance-amount">₹0.00</p>
+        </section>
+
+        <!-- ── Summary Cards ────────────────────────────────── -->
+        <section class="summary" aria-label="Income and expense summary">
+          <article class="summary__card summary__card--income">
+            <header class="summary__card-header">
+              <span class="summary__card-icon" aria-hidden="true">↑</span>
+              <h3 class="summary__card-label">Total Income</h3>
+            </header>
+            <p class="summary__card-amount" id="total-income">₹0.00</p>
+          </article>
+
+          <article class="summary__card summary__card--expense">
+            <header class="summary__card-header">
+              <span class="summary__card-icon" aria-hidden="true">↓</span>
+              <h3 class="summary__card-label">Total Expenses</h3>
+            </header>
+            <p class="summary__card-amount" id="total-expense">₹0.00</p>
+          </article>
+        </section>
+
+        <!-- ── Add Transaction Form ──────────────────────────── -->
+        <section class="form-section" aria-labelledby="form-heading">
+          <h2 class="form-section__heading" id="form-heading">Add Transaction</h2>
+
+          <div class="transaction-form" role="form" aria-label="Add a new transaction">
+
+            <div class="form-field">
+              <label class="form-field__label" for="description">Description</label>
+              <input
+                class="form-field__input"
+                type="text"
+                id="description"
+                name="description"
+                placeholder="e.g. Grocery shopping"
+                maxlength="80"
+                autocomplete="off"
+                required
+              />
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label" for="amount">Amount (₹)</label>
+              <input
+                class="form-field__input"
+                type="number"
+                id="amount"
+                name="amount"
+                placeholder="0.00"
+                min="0.01"
+                step="0.01"
+                required
+              />
+            </div>
+
+            <div class="form-field">
+              <label class="form-field__label" for="transaction-type">Type</label>
+              <select
+                class="form-field__select"
+                id="transaction-type"
+                name="transaction-type"
+                required
+              >
+                <option value="" disabled selected>Select type…</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+  <label class="form-field__label" for="category">Category</label>
+  <select
+    class="form-field__select"
+    id="category"
+    name="category"
+    required
+  >
+    <option value="" disabled selected>Select category...</option>
+    <option value="Food">Food</option>
+    <option value="Travel">Travel</option>
+    <option value="Shopping">Shopping</option>
+    <option value="Bills">Bills</option>
+    <option value="Salary">Salary</option>
+    <option value="Entertainment">Entertainment</option>
+    <option value="Other">Other</option>
+  </select>
+</div>
+
+            <button
+              class="btn btn--primary btn--full"
+              type="button"
+              id="add-transaction-btn"
+            >
+              Add Transaction
+            </button>
+
+          </div>
+        </section>
+
+        <div class="search-container">
+    <input type="text" id="search" placeholder="Search transactions by description...">
+</div>
+
+
+<!-- ── Transaction History ───────────────────────────── -->
+<section class="history-section" aria-labelledby="history-heading">
+
+        <!-- ── Transaction History ───────────────────────────── -->
+        <section class="history-section" aria-labelledby="history-heading">
+
+          <div class="history-section__toolbar">
+            <button id="export-btn" class="btn btn--primary">
+              Export CSV
+            </button>
+            <h2 class="history-section__heading" id="history-heading">
+              Transaction History
+            </h2>
+
+            <div class="filter-control">
+              <label class="filter-control__label" for="filter-type">Show</label>
+              <select
+                class="filter-control__select"
+                id="filter-type"
+                name="filter-type"
+                aria-label="Filter transactions"
+              >
+                <option value="all">All</option>
+                <option value="income">Income</option>
+                <option value="expense">Expense</option>
+              </select>
+            </div>
+          </div>
+
+          <ul
+            class="transaction-list"
+            id="transaction-list"
+            role="list"
+            aria-live="polite"
+            aria-label="List of transactions"
+          >
+            <!-- Empty state – shown when no transactions exist -->
+            <li class="transaction-list__empty" id="empty-state" role="listitem">
+              <span class="transaction-list__empty-icon" aria-hidden="true">📋</span>
+              <p class="transaction-list__empty-text">No transactions yet.</p>
+              <p class="transaction-list__empty-hint">Add one above to get started.</p>
+            </li>
+
+            <!-- Transaction Item Template (repeated per entry via JS) -->
+            <!--
+            <li class="transaction-item transaction-item--income" data-id="{{id}}">
+              <div class="transaction-item__info">
+                <span class="transaction-item__description">{{description}}</span>
+                <time class="transaction-item__date" datetime="{{isoDate}}">{{formattedDate}}</time>
+              </div>
+              <div class="transaction-item__meta">
+                <span class="transaction-item__badge transaction-item__badge--income">Income</span>
+                <span class="transaction-item__amount">+₹{{amount}}</span>
+                <button
+                  class="transaction-item__delete btn btn--icon"
+                  aria-label="Delete transaction: {{description}}"
+                  data-id="{{id}}"
+                >✕</button>
+              </div>
+            </li>
+            -->
+          </ul>
+
+        </section>
+
+      </main>
+
+      <!-- Site Footer -->
+      <footer class="site-footer">
+        <p class="site-footer__text">Expense Tracker &copy; 2026</p>
+      </footer>
+
+    </div><!-- /.app -->
+
+   <script src="script.js"></script>
+
+  </body>
+</html>
