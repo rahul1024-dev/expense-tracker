@@ -1,16 +1,32 @@
 
-## Expense Tracker
 
-Developed a responsive web-based Expense Tracker application that helps users efficiently manage their personal finances by tracking income and expenses. The application allows users to add, edit, delete, and categorize transactions while automatically calculating the current balance, total income, and total expenses. It includes transaction search, category-based filtering, dark/light mode, and CSV export for better usability. All data is stored using the browser's Local Storage, ensuring that user information persists even after refreshing the page.
+# 💰 Expense Tracker
 
-**Key Features:**
+🚀 **Live Demo:** https://rahul1024-dev.github.io/expense-tracker/
 
-* Add, edit, and delete income and expense transactions
-* Automatic calculation of balance, total income, and total expenses
-* Category-based filtering and transaction search
-* Dark and Light theme toggle
-* CSV export for transaction history
-* Responsive design for desktop and mobile devices
-* Data persistence using Local Storage
+💻 **GitHub Repository:** https://github.com/rahul1024-dev/expense-tracker
 
-**Tech Stack:** HTML5, CSS3, JavaScript (ES6), Local Storage
+---
+
+## 📖 About
+
+A responsive Expense Tracker web application that helps users efficiently manage their income and expenses. The application allows users to add, edit, delete, and categorize transactions while automatically calculating balances. Data is stored locally using the browser's Local Storage.
+
+## ✨ Features
+
+- ✅ Add Income & Expense
+- ✅ Edit & Delete Transactions
+- ✅ Real-time Balance Calculation
+- ✅ Search Transactions
+- ✅ Category Filtering
+- ✅ Dark & Light Mode
+- ✅ CSV Export
+- ✅ Local Storage Support
+- ✅ Responsive Design
+
+## 🛠️ Tech Stack
+
+- HTML5
+- CSS3
+- JavaScript (ES6)
+- Local Storage API
