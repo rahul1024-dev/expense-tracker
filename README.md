@@ -1,4 +1,4 @@
-# expense-tracker
+
 ## Expense Tracker
 
 Developed a responsive web-based Expense Tracker application that helps users efficiently manage their personal finances by tracking income and expenses. The application allows users to add, edit, delete, and categorize transactions while automatically calculating the current balance, total income, and total expenses. It includes transaction search, category-based filtering, dark/light mode, and CSV export for better usability. All data is stored using the browser's Local Storage, ensuring that user information persists even after refreshing the page.
